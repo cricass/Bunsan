@@ -1,0 +1,38 @@
+import lxml.etree
+xml_text = """<?xml version="1.0" encoding="UTF-8"?>
+
+<bookstore>
+
+<book>
+  <title lang="en">Harry Potter</title>
+  <price>29.99</price>
+</book>
+
+<book>
+  <title lang="en">Learning XML</title>
+  <price>39.95</price>
+</book>
+
+</bookstore>""".encode("utf-8")
+
+root = lxml.etree.fromstring(xml_text)
+
+query_Select = input("Ingresa la query que deseas buscar, ya sea por xpath, por numero: ")
+if(query_Select == "//book/title | //book/price" or query_Select == "1"):
+    query = root.xpath('//book/title | //book/price')
+    for elements in query:
+        print(elements.text)
+
+elif(query_Select == "//title | //price" or query_Select == "2"):
+    query = root.xpath('//title | //price')
+    for elements in query:
+        print(elements.text)
+
+elif(query_Select == "/bookstore/book/title | //price" or query_Select == "3"):
+    query = root.xpath('/bookstore/book/title | //price')
+    for elements in query:
+        print(elements.text)
+else:
+    print("opcion invalida")
+
+    
